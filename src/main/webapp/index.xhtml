@@ -12,7 +12,7 @@
 	<h2>
 		<h:outputText value="Lista Productos"></h:outputText>
 	</h2>
-	<h:form>
+	<h:form >
 	<h:commandButton action="#{productoBean.nuevo()}" value="Nuevo Producto"></h:commandButton>
 	
 		<h:dataTable value="#{productoBean.listarProductos()}" var="producto"
@@ -35,15 +35,15 @@
 			</h:column>
 			
 
-			<!--  <h:column>
+			 <!-- <h:column>
 				<f:facet name="header">F. Actualizar</f:facet>
 				<h:outputText value="#{cliente.factualizar}"></h:outputText>
-			</h:column>
+			</h:column>-->
 			<h:column>
 				<f:facet name="header">Editar</f:facet>
-				<h:commandButton action="#{clienteBean.editar(cliente.id)}" value="Editar"></h:commandButton>
+				<h:commandButton action="#{productoBean.editar(producto.id)}" value="Editar"></h:commandButton>
 			</h:column>
-			<h:column>
+			<!--  <h:column>
 				<f:facet name="header">Eliminar</f:facet>
 				<h:commandButton action="#{clienteBean.eliminar(cliente.id)}" value="Eliminar"></h:commandButton>
 			</h:column>-->

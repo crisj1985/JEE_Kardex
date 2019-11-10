@@ -27,21 +27,6 @@ public class ProductoBean
 	public List<Productos> listarProductos()
 	{
 		List<Productos> productos = new ArrayList<>();
-		/*Productos p = new Productos ();
-		p.setId(55L);
-		p.setNombre("camisetas");
-		p.setValor(10.5);
-		p.setCantidad(5);
-		Productos p1 = new Productos ();
-		p1.setId(6L);
-		p1.setNombre("tazas");
-		p1.setValor(5.8);
-		p1.setCantidad(12);
-		ProductoDao obj= new ProductoDao();
-		obj.guardar(p);
-//		obj.guardar(p1);
-		//productos.add(p);
-		productos.add(p1);*/
 		ProductoDao obj= new ProductoDao();
 		productos = obj.listar();
 		
@@ -52,6 +37,25 @@ public class ProductoBean
 	{
 		ProductoDao obj= new ProductoDao();
 		obj.guardar(p);
+		return "faces/index.xhtml";
+	}
+	
+	//public Productos buscar
+	
+	public String editar(Long id)
+	{
+		ProductoDao obj= new ProductoDao();
+		Productos p = new Productos();
+		p = obj.buscarProducto(id);
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("Productos", p);
+		return "faces/editar.xhtml";
+	}
+	
+	public String actualizar(Productos p)
+	{
+		ProductoDao obj= new ProductoDao();
+		obj.editar(p);
 		return "faces/index.xhtml";
 	}
 	
