@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<title>Nuevo Producto</title>
+</h:head>
+<h:body>
+	<h:form>
+		<h:panelGrid columns="2" cellspacing="20" border="1">
+			<f:facet name="header">
+				<h:outputText value="Nuevo Producto"></h:outputText>
+			</f:facet>
+
+
+			<h:outputText value="Id"></h:outputText>
+			<h:inputText value="#{Productos.id}"></h:inputText>
+			
+			<h:outputText value="Nombre"></h:outputText>
+			<h:inputText value="#{Productos.nombre}"></h:inputText>
+
+			<h:outputText value="Valor"></h:outputText>
+			<h:inputText value="#{Productos.valor}"></h:inputText>
+
+
+			<h:outputText value="Cantidad"></h:outputText>
+			<h:inputText value="#{Productos.cantidad}"></h:inputText>
+
+
+			<f:facet name="footer">
+				<h:commandButton action="#{productoBean.guardar(Productos)}"
+					value="Guardar"></h:commandButton>
+			</f:facet>
+
+		</h:panelGrid>
+
+	</h:form>
+
+</h:body>
+</html>
