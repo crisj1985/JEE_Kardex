@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html lang="es" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<meta charset="utf-8" name="viewport"
+		content="width=device-width, initial-scale=1"
+		http-equiv="X-UA-Conpatible" />
+	<title>Plantilla Básica JSF</title>
+</h:head>
+<h:body>
+	<h2>
+		<h:outputText value="Inventario"></h:outputText>
+	</h2>
+	<h:form >
+	<h:commandButton action="#{inventarioBean.nuevo()}" value="Ingresar Detalle"></h:commandButton>
+	
+		<h:dataTable value="#{inventarioBean.listarInventario()}" var="inventario"
+			border="1">
+			<h:column>
+				<f:facet name="header">Fecha</f:facet>
+				<h:outputText value="#{inventario.fecha}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Detalle</f:facet>
+				<h:outputText value="#{inventario.detalle}"></h:outputText>
+			</h:column>
+			<!--  <h:column>
+				<f:facet name="header">Producto</f:facet>
+				<p:selectOneMenu></p:selectOneMenu>
+			</h:column>-->
+			
+			<h:column>
+				<f:facet name="header">Valor</f:facet>
+				<h:outputText value="#{inventario.valor}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Cantidad</f:facet>
+				<h:outputText value="#{inventario.cantidad}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Total</f:facet>
+				<h:outputText value="#{inventario.total}"></h:outputText>
+			</h:column>
+			<h:column>
+				<f:facet name="header">Saldo</f:facet>
+				<h:outputText value="#{inventario.saldo}"></h:outputText>
+			</h:column>
+			
+
+			 <!-- <h:column>
+				<f:facet name="header">F. Actualizar</f:facet>
+				<h:outputText value="#{cliente.factualizar}"></h:outputText>
+			</h:column>-->
+			<h:column>
+				<f:facet name="header">Editar</f:facet>
+				<h:commandButton action="#{inventarioBean.editar(inventario.idInventario)}" value="Editar"></h:commandButton>
+			</h:column>
+			<!--  <h:column>
+				<f:facet name="header">Eliminar</f:facet>
+				<h:commandButton action="#{clienteBean.eliminar(cliente.id)}" value="Eliminar"></h:commandButton>
+			</h:column>-->
+		</h:dataTable>
+	</h:form>
+</h:body>
+</html>

@@ -10,6 +10,7 @@ import javax.faces.context.FacesContext;
 import java.util.*;
 
 import com.todo1.dao.ProductoDao;
+import com.todo1.model.Inventario;
 import com.todo1.model.Productos;
 
 @ManagedBean(name = "productoBean")
@@ -22,6 +23,14 @@ public class ProductoBean
 		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
 		sessionMap.put("Productos", p);
 		 return "faces/nuevo.xhtml";
+	}
+	
+	
+	public String inventario(){
+		/*Inventario inv= new Inventario();
+		Map<String, Object> sessionMap = FacesContext.getCurrentInstance().getExternalContext().getSessionMap();
+		sessionMap.put("Inventario", p);*/
+		 return "faces/inventario.xhtml";
 	}
 	
 	public List<Productos> listarProductos()

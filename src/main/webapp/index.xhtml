@@ -13,6 +13,7 @@
 		<h:outputText value="Lista Productos"></h:outputText>
 	</h2>
 	<h:form >
+	<h:commandButton action="#{productoBean.inventario()}" value="Inventario"></h:commandButton>
 	<h:commandButton action="#{productoBean.nuevo()}" value="Nuevo Producto"></h:commandButton>
 	
 		<h:dataTable value="#{productoBean.listarProductos()}" var="producto"
