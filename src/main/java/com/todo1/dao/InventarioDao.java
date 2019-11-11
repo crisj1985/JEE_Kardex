@@ -15,24 +15,37 @@ EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 	
 	public void guardar(Inventario inv)
 	{
-		entity.getTransaction().begin();
-		entity.persist(inv);
-		entity.getTransaction().commit();
-		//JPAUtil.shutdown();
+		try {
+			entity.getTransaction().begin();
+			entity.persist(inv);
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			entity.getTransaction().rollback();
+		}
+		
 	}
 	
 	public void editar (Inventario inv)
 	{
-		entity.getTransaction().begin();
-		entity.merge(inv);
-		entity.getTransaction().commit();
-		//JPAUtil.shutdown();
+		try {
+			entity.getTransaction().begin();
+			entity.merge(inv);
+			entity.getTransaction().commit();;
+		} catch (Exception e) {
+			entity.getTransaction().rollback();
+		}
 	}
 	
 	public Inventario buscarInventario(Long id)
 	{
 		Inventario objInventario = new Inventario();
-		objInventario = entity.find(Inventario.class, id);
+		
+		try {
+			objInventario = entity.find(Inventario.class, id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		return objInventario;
 	}
 
@@ -42,6 +55,7 @@ EntityManager entity = JPAUtil.getEntityManagerFactory().createEntityManager();
 		List<Inventario> objInventario = new ArrayList<Inventario>();
 		Query q = entity.createQuery("SELECT p FROM Inventario p");
 		objInventario = q.getResultList();
+		objInventario.size();
 		return objInventario;
 		
 	}

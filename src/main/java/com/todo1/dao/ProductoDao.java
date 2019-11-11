@@ -15,24 +15,37 @@ public class ProductoDao {
 	
 	public void guardar(Productos p)
 	{
-		entity.getTransaction().begin();
-		entity.persist(p);
-		entity.getTransaction().commit();
-		//JPAUtil.shutdown();
+		try {
+			entity.getTransaction().begin();
+			entity.persist(p);
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			entity.getTransaction().rollback();
+		}
+
 	}
 	
 	public void editar (Productos p)
 	{
-		entity.getTransaction().begin();
-		entity.merge(p);
-		entity.getTransaction().commit();
-		//JPAUtil.shutdown();
+		try {
+			entity.getTransaction().begin();
+			entity.merge(p);
+			entity.getTransaction().commit();
+		} catch (Exception e) {
+			entity.getTransaction().rollback();
+		}
+		
 	}
 	
 	public Productos buscarProducto(Long id)
 	{
 		Productos producto = new Productos();
-		producto = entity.find(Productos.class, id);
+		try {
+			producto = entity.find(Productos.class, id);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
 		return producto;
 	}
 
@@ -42,6 +55,8 @@ public class ProductoDao {
 		List<Productos> productos = new ArrayList<Productos>();
 		Query q = entity.createQuery("SELECT p FROM Productos p");
 		productos = q.getResultList();
+		productos.size();
+		//JPAUtil.shutdown();	
 		return productos;
 		
 	}

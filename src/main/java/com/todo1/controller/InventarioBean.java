@@ -7,14 +7,44 @@ import java.util.Map;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 
 import com.todo1.dao.InventarioDao;
 import com.todo1.dao.ProductoDao;
-import com.todo1.model.Inventario;;
+import com.todo1.model.Inventario;
+import com.todo1.model.Productos;
 
 @ManagedBean(name="inventarioBean")
 @RequestScoped
 public class InventarioBean {
+	
+	private ArrayList<SelectItem> productos=null;
+	private Long producto;
+	
+
+	public Long getProducto() {
+		return producto;
+	}
+
+	public void setProducto(Long producto) {
+		this.producto = producto;
+	}
+
+	public ArrayList <SelectItem> getProductos ()
+	{
+		if(productos==null)
+			productos	= new ArrayList<SelectItem>();
+		
+		ProductoDao obj= new ProductoDao();	
+		
+		for(Productos p : obj.listar())
+		{
+			SelectItem s = new SelectItem(p.getId(),p.getNombre());
+			productos.add(s);
+		}
+		
+		return productos;
+	} 	
 	
 	public String nuevo(){
 		Inventario inv= new Inventario();
@@ -28,6 +58,10 @@ public class InventarioBean {
 		List<Inventario> objInventario = new ArrayList<>();
 		InventarioDao obj= new InventarioDao();
 		objInventario = obj.listar();
+		for(Inventario i : objInventario)
+		{
+			System.out.println( i.toString());
+		}
 		
 		return objInventario;
 	}
@@ -35,6 +69,11 @@ public class InventarioBean {
 	public String guardar(Inventario inv)
 	{
 		InventarioDao obj= new InventarioDao();
+		//inv.setProducto(producto);
+		ProductoDao objProducto= new ProductoDao();
+		Productos p = new Productos();
+		p = objProducto.buscarProducto(producto);
+		inv.setProducto(p);
 		obj.guardar(inv);
 		return "faces/inventario.xhtml";
 	}

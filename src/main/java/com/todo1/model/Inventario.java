@@ -5,9 +5,12 @@ import java.util.Date;
 import javax.faces.bean.RequestScoped;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity(name="Inventario")
@@ -18,7 +21,7 @@ public class Inventario
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idInventario;
 	@Column
-	private Date fecha;
+	private String fecha;
 	@Column
 	private String detalle;
 	@Column
@@ -29,19 +32,27 @@ public class Inventario
 	private double total;
 	@Column
 	private int saldo;
-	/*@Column
-	private Long idProducto;*/
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "id")
+	private Productos producto;
+	
+	public Productos getProducto() {
+		return producto;
+	}
+	public void setProducto(Productos producto) {
+		this.producto = producto;
+	}
 	public Long getIdInventario() {
 		return idInventario;
 	}
 	public void setIdInventario(Long idInventario) {
 		this.idInventario = idInventario;
 	}
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
 	}
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 	public String getDetalle() {
@@ -73,6 +84,13 @@ public class Inventario
 	}
 	public void setSaldo(int saldo) {
 		this.saldo = saldo;
+	}
+	@Override
+	public String toString() {
+		return "Inventario [idInventario=" + idInventario + ", fecha=" + fecha
+				+ ", detalle=" + detalle + ", valor=" + valor + ", cantidad="
+				+ cantidad + ", total=" + total + ", saldo=" + saldo
+				+ ", producto=" + producto + "]";
 	}
 	
 	
